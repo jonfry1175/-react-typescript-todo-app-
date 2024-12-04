@@ -1,19 +1,47 @@
-import React, { useEffect } from "react";
-import { useTheme } from "./context/ThemeContext";
-import { ModeToggle } from "./components/ui/ModeToggle";
+import React from "react";
+import CardtTask, { CardTaskProps } from "./components/CardTask";
+import Header from "./components/Header";
 
 const App: React.FC = () => {
-  const { theme } = useTheme();
+  const data: Omit<CardTaskProps, "handleClick">[] = [
+    {
+      title: "title",
+      description: "description",
+      body: "body",
+    },
+    {
+      title: "title",
+      description: "description",
+      body: "body",
+    },
+    {
+      title: "title",
+      description: "description",
+      body: "body",
+    },
+  ];
 
-  useEffect(() => {
-    console.log(theme);
-  }, [theme]);
+  const handleChangeStatusTask = (action: "undo" | "done"): void => {
+    if (action === "undo") {
+      // eslint-disable-next-line no-console
+      console.error("undo");
+    } else {
+      // eslint-disable-next-line no-console
+      console.error("done");
+    }
+  };
   return (
-    <div className="h-screen ">
-      <h1>App {theme}</h1>
-      <div className="flex justify-end">
-        <ModeToggle />
-      </div>
+    <div className="h-screen">
+      <Header />
+      {data.length > 0 &&
+        data.map((data) => (
+          <CardtTask
+            title={data.title}
+            description={data.description}
+            body={data.body}
+            handleClick={handleChangeStatusTask}
+          />
+        ))}
     </div>
   );
 };
