@@ -34,8 +34,9 @@ const App: React.FC = () => {
     <div className="h-screen">
       <Header />
       {data.length > 0 &&
-        data.map((data) => (
+        data.map((data, index) => (
           <CardtTask
+            key={index}
             title={data.title}
             description={data.description}
             body={data.body}
